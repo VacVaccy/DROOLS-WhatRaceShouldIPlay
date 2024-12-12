@@ -1,0 +1,48 @@
+package com.sample
+
+import com.sample.App;
+global App window;
+
+declare Question
+    text : String 
+    responses : String[]
+end
+
+declare Response
+    question : Question 
+    response : String 
+end
+
+rule "Init"
+when
+then
+    insert(new Question("I wanna play Dungeons & Dragons?", new String[]{"Yay!"}));
+    window = new App();
+    insert(window);
+end
+
+rule "Q1"
+when
+    q : Question()
+then
+    String[] options = q.getResponses();
+    
+    String response = window.askQuestion(q.getText(), options); 
+    
+    Response r = new Response(q, response);
+    
+    insert(r);
+end
+
+rule "Q2"
+when
+    r : Response(question.text == "I wanna play Dungeons & Dragons?" && response == "Yay!")
+then
+    Question q2 = new Question("Why do you wanna play High Adventure Pop Fantasy?", new String[]{"I wanna go on adventures!", "Can I be someone from Lord of the Rings or something?", "I want to be a special snowflake", "I don't like fantasy I just wanna do this RPG thing"});
+    
+    String response2 = window.askQuestion(q2.getText(), q2.getResponses());
+    
+    Response r2 = new Response(q2, response2);
+    
+    insert(r2);
+end
