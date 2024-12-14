@@ -713,7 +713,7 @@ end
 
 rule "ENDING - HALF-ORC"
 when
-    r : Response(response == "Nah, give me some monster blood!" || response == "Wait, what's this Intelligence penalty? I don't want to be stupid, can I backpedal a bit and be a bit more heroic?" || response = "One of my parents is from a species that is thought to be brutish and cruel")
+    r : Response(response == "Nah, give me some monster blood!" || response == "Wait, what's this Intelligence penalty? I don't want to be stupid, can I backpedal a bit and be a bit more heroic?" || response == "One of my parents is from a species that is thought to be brutish and cruel")
 then
     Question qx = new Question("You might want to be HALF-ORC - PHB", new String[]{"EXIT - HALF-ORC"});
     
@@ -1079,7 +1079,7 @@ rule "Q41"
 when
     r : Response(response == "Yay I'm done!")
 then
-    Question qx = new Question("Wait, now it gets complicated. Is magic or nature more important to you?", new String[]{"Motherfucker I'm MADE of Magic", "Elves are and always will be badass treehuggers", "Wait, none of this is right});
+    Question qx = new Question("Wait, now it gets complicated. Is magic or nature more important to you?", new String[]{"Motherfucker I'm MADE of Magic", "Elves are and always will be badass treehuggers", "Wait, none of this is right"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
