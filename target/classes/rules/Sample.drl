@@ -51,7 +51,7 @@ rule "Q1"
 when
     r : Response(response == "I don't like fantasy I just wanna do this RPG thing")
 then
-    Question qx = new Question("You don't wanna play D&D, you want to play something else", new String[]{"Elves are dumb let's be vampires and shit"});
+    Question qx = new Question("You don't wanna play D&D, you want to play something else", new String[]{"Elves are dumb let's be vampires n shit"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -62,7 +62,7 @@ end
 
 rule "BAD ENDING - 1"
 when
-    r : Response(response == "Elves are dumb lets be vampires n shit")
+    r : Response(response == "Elves are dumb let's be vampires n shit")
 then
     app.badFinish("And now we are playing Vampyre I hope you're happy");
 end
