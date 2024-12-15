@@ -211,7 +211,7 @@ rule "Q9 - ENDING - GENASI"
 when
     r : Response(response == "Yeah that works")
 then
-    Question qx = new Question("You might want to be GENASI (Elemental Evil)", new String[]{"GENASI sounds great!", "Let's Captain Planet this shit"});
+    Question qx = new Question("You might want to be a GENASI (Elemental Evil)", new String[]{"GENASI sounds great!", "Let's Captain Planet this shit"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -372,7 +372,7 @@ rule "Q16 - ENDING - KALASHTAR"
 when
     r : Response(response == "No I want to be mysterious")
 then
-    Question qx = new Question("You might want to be KALASHTAR - Eberron", new String[]{"KALASHTAR sounds great!", "...I don't know what this is"});
+    Question qx = new Question("You might want to be a KALASHTAR (Eberron)", new String[]{"KALASHTAR sounds great!", "...I don't know what this is"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -550,7 +550,7 @@ end
 
 rule "Q22"
 when
-    r : Response(response == "I wanna go on adventures!" || response == "SRYSLY")
+    r : Response(response == "I wanna go on adventures!" || response == "SRYSLY" || response == "Yeah, I guess you're right")
 then
     Question qx = new Question("Every hero is special. What makes you special?", new String[]{"What's on the inside. And my sword. And my magic.", "Uh, I'm an elf or something?"});
     
@@ -702,9 +702,9 @@ end
 
 rule "Q31"
 when
-    r : Response(response == "No problem, lets move over here")
+    r : Response(response == "No problem, lets move over here" || response == "...you're right. Let's stick to something at least a bit familiar")
 then
-    Question qx = new Question("Uncommon Races! What sounds appealing to you?", new String[]{"We're on a mission from God", "Basically Aquaman is the best DC superhero", "Beep Boop Bop I am Robot", "...can I be a doppelganger?", "Can I be an animal person", "Can I be a classic Monster?"});
+    Question qx = new Question("Uncommon Races! What sounds appealing to you?", new String[]{"We're on a mission from God", "Basically Aquaman is the best DC superhero", "Beep Boop Bop I am Robot", "...can I be a doppelganger?", "Can I be an animal person?", "Can I be a classic Monster?"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -811,7 +811,7 @@ rule "Q36 - ENDING - AASIMAR"
 when
     r : Response(response == "We're on a mission from God")
 then
-    Question qx = new Question("You might want to be an AASIMAR (Volos)", new String[]{"ASSIMAR sounds great!", "Fuck off Tieflings!"});
+    Question qx = new Question("You might want to be an AASIMAR (Volos)", new String[]{"AASIMAR sounds great!", "Fuck off Tieflings!"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -865,7 +865,7 @@ rule "Q38 - ENDING - DWARF"
 when
     r : Response(response == "Do u even lift bro?")
 then
-    Question qx = new Question("You might want to be DWARF (PHB)", new String[]{"DWARF sounds great!", "Wait I don't want to be short", "By Thorin's beard, time to drink ale and axe things!"});
+    Question qx = new Question("You might want to be a DWARF (PHB)", new String[]{"DWARF sounds great!", "Wait I don't want to be short", "By Thorin's beard, time to drink ale and axe things!"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -999,7 +999,7 @@ rule "Q44 - ENDING - HALFLING"
 when
     r : Response(response == "I would like to maintain some semblance of gravitas")
 then
-    Question qx = new Question("You might want to be HALFLING - PHB", new String[]{"HALFLING sounds great!", "Cool, off-brand Hobbit"});
+    Question qx = new Question("You might want to be a HALFLING (PHB)", new String[]{"HALFLING sounds great!", "Cool, off-brand Hobbit"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -1046,7 +1046,7 @@ rule "Q46 - ENDING - GNOME"
 when
     r : Response(response == "EVERYTHING IS MAGIC AND GLITTER")
 then
-    Question qx = new Question("You might want to be GNOME - PHB", new String[]{"GNOME sounds great!", "...is this just a magic hobbit?"});
+    Question qx = new Question("You might want to be a GNOME (PHB)", new String[]{"GNOME sounds great!", "...is this just a magic hobbit?"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -1086,7 +1086,7 @@ rule "Q48 - ENDING - MOUNTAIN GNOME"
 when
     r : Response(response == "LETS MAKE TOYS")
 then
-    Question qx = new Question("You might want to be MOUNTAIN GNOME - Gnome Subrace", new String[]{"MOUNTAIN GNOME sounds great!", "FORGET THE TOYS WE MUST GO DEEPER"});
+    Question qx = new Question("You might want to be a MOUNTAIN GNOME (Gnome Subrace)", new String[]{"MOUNTAIN GNOME sounds great!", "FORGET THE TOYS WE MUST GO DEEPER"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -1238,7 +1238,7 @@ rule "Q57 - ENDING - DROW"
 when
     r : Response(response == "I wanted to be Dark and Brooding" || response == "I'm quick and lithe, like an elf but DARK")
 then
-    Question qx = new Question("You might want to be DROW - Elf Subrace", new String[]{"DROW sounds great!", "I SAID DARK AND BROODING"});
+    Question qx = new Question("You might want to be a DROW (Elf Subrace)", new String[]{"DROW sounds great!", "I SAID DARK AND BROODING"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     

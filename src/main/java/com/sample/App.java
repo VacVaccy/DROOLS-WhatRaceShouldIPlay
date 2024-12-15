@@ -30,7 +30,7 @@ public class App {
         // label z pytaniem
         JLabel questionLabel = new JLabel("<html><body text-align: center;'>" + question + "</body></html>");
         questionLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        questionLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 15, 0)); // góra, lewo, dół, prawo
+        questionLabel.setBorder(BorderFactory.createEmptyBorder(30, 15, 15, 15)); // góra, lewo, dół, prawo
         questionLabel.setFont(new Font("Perpetua", Font.BOLD, 22));
         //questionLabel.setForeground(Color.WHITE);
         questionLabel.setForeground(fire_yellow2);
@@ -48,7 +48,7 @@ public class App {
         dialog.setLayout(new BorderLayout());
         dialog.add(questionLabel, BorderLayout.NORTH);
         dialog.add(buttonPanel, BorderLayout.CENTER);
-        dialog.setSize(600, 400);
+        dialog.setSize(800, 500);
 
         final String[] selectedOption = {null};
 
@@ -99,7 +99,7 @@ public class App {
         resultLabel.setFont(new Font("Perpetua", Font.BOLD, 24));
         resultLabel.setForeground(fire_yellow2); 
         
-        resultLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        resultLabel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 15));
         
         // okno
         JDialog resultDialog = new JDialog((Frame) null, "Result", true);
@@ -127,7 +127,7 @@ public class App {
         resultLabel.setFont(new Font("Perpetua", Font.BOLD, 24));
         resultLabel.setForeground(fire_yellow2); 
         
-        resultLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        resultLabel.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 15));
         
         // okno
         JDialog resultDialog = new JDialog((Frame) null, "Result", true);
