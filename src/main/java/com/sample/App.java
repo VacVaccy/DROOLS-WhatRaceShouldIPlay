@@ -111,6 +111,35 @@ public class App {
         resultDialog.setVisible(true);
     }
     
+    public static void badFinish(String info) {
+        // custom kolory
+        Color dark_brown = new Color(52, 21, 3);
+        Color fire_orange = new Color(252, 139, 50);
+        Color fire_yellow2 = new Color(250, 216, 100);
+        
+        // tło
+        BackgroundPanel backgroundPanel = new BackgroundPanel("/images/tav2_4.jpg");
+        
+        // label z wynikiem
+        JLabel resultLabel = new JLabel("<html><body>" + info + "</body></html>");
+        resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        resultLabel.setVerticalAlignment(SwingConstants.CENTER);
+        resultLabel.setFont(new Font("Perpetua", Font.BOLD, 24));
+        resultLabel.setForeground(fire_yellow2); 
+        
+        resultLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        
+        // okno
+        JDialog resultDialog = new JDialog((Frame) null, "Result", true);
+        resultDialog.setContentPane(backgroundPanel); // panel + tło
+        resultDialog.setLayout(new BorderLayout());
+        resultDialog.add(resultLabel, BorderLayout.CENTER);
+        resultDialog.setSize(600, 400);
+        resultDialog.setLocationRelativeTo(null);
+        resultDialog.setVisible(true);
+    }
+
+    
  // tło panelu
     static class BackgroundPanel extends JPanel {
         private BufferedImage backgroundImage;
