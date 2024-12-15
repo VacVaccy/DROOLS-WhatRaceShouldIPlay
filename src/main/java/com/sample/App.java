@@ -25,7 +25,7 @@ public class App {
         Color fire_yellow3 = new Color(250,231,148);
         
         // tło
-        BackgroundPanel backgroundPanel = new BackgroundPanel("/images/tav2.jpg");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("/images/tav2_3.jpg");
 
         // label z pytaniem
         JLabel questionLabel = new JLabel("<html><body text-align: center;'>" + question + "</body></html>");
@@ -88,22 +88,18 @@ public class App {
         Color dark_brown = new Color(52, 21, 3);
         Color fire_orange = new Color(252, 139, 50);
         Color fire_yellow2 = new Color(250, 216, 100);
-        Color bg1 = new Color(140,50,6,255);
         
         // tło
-        BackgroundPanel backgroundPanel = new BackgroundPanel("/images/tav2.jpg");
+        BackgroundPanel backgroundPanel = new BackgroundPanel("/images/tav2_4.jpg");
         
         // label z wynikiem
         JLabel resultLabel = new JLabel("<html><body>You should play as: " + name + "!</body></html>");
         resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
         resultLabel.setVerticalAlignment(SwingConstants.CENTER);
         resultLabel.setFont(new Font("Perpetua", Font.BOLD, 24));
-        resultLabel.setForeground(fire_yellow2); // Kolor tekstu
-        // tło label
-        resultLabel.setOpaque(true);
-        resultLabel.setBackground(dark_brown);
+        resultLabel.setForeground(fire_yellow2); 
         
-        resultLabel.setBorder(BorderFactory.createEmptyBorder(30, 0, 15, 0)); // Odstępy
+        resultLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         
         // okno
         JDialog resultDialog = new JDialog((Frame) null, "Result", true);

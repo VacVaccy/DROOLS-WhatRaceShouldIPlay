@@ -670,7 +670,7 @@ then
     //Response rx = new Response(qx, responsex);
     
     //insert(rx);
-    app.finish("HUMAN(PHB)");
+    app.finish("HUMAN (PHB)");
 end
 
 rule "Q24"
