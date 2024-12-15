@@ -663,13 +663,14 @@ rule "Q23 - ENDING - HUMAN"
 when
     r : Response(response == "What's on the inside. And my sword. And my magic.")
 then
-    Question qx = new Question("You might want to be HUMAN - PHB", new String[]{"HUMAN - EXIT", "WAAAAIIIIIIIIT"});
+    //Question qx = new Question("You might want to be HUMAN - PHB", new String[]{"HUMAN - EXIT", "WAAAAIIIIIIIIT"});
     
-    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    //String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
-    Response rx = new Response(qx, responsex);
+    //Response rx = new Response(qx, responsex);
     
-    insert(rx);
+    //insert(rx);
+    app.finish("HUMAN(PHB)");
 end
 
 rule "Q24"
