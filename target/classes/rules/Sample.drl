@@ -305,7 +305,7 @@ rule "Q13"
 when
     r : Response(response == "Alright so I can explode heads with my mind right?")
 then
-    Question qx = new Question("Not quite. Anyways Gith comes in two flavors", new String[]{"WE ARE IMMORTAL WE ARE CONQUERERS WE ARE GITH", "Zen as fuck KungFu as Fuck Forge Chaos into Reality"});
+    Question qx = new Question("Not quite. Anyways Gith comes in two flavors", new String[]{"WE ARE IMMORTAL WE ARE CONQUERERS WE ARE GITH", "Zen as fuck Kung Fu as Fuck Forge Chaos into Reality"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
@@ -323,7 +323,7 @@ end
 
 rule "ENDING - GITHZERAI"
 when
-    r : Response(response == "Zen as fuck KungFu as Fuck Forge Chaos into Reality")
+    r : Response(response == "Zen as fuck Kung Fu as Fuck Forge Chaos into Reality")
 then
     app.finish("GITHZERAI (Gith Subrace)");
 end
@@ -343,7 +343,7 @@ end
 
 rule "ENDING - VEDALKEN"
 when
-    r : Response(response == "Zen as fuck KungFu as Fuck Forge Chaos into Reality")
+    r : Response(response == "Fine you got me")
 then
     app.finish("VEDALKEN (GGtR)");
 end
@@ -363,7 +363,7 @@ end
 
 rule "ENDING - SIMIC HYBRID"
 when
-    r : Response(response == "Zen as fuck KungFu as Fuck Forge Chaos into Reality")
+    r : Response(response == "That is the shit I'm talking about")
 then
     app.finish("SIMIC HYBRID (GGtR)");
 end
@@ -417,7 +417,7 @@ end
 
 rule "ENDING - YUAN-TI"
 when
-    r : Response(response == "Snek")
+    r : Response(response == "Snek" || response == "Deception is the ultimate weapon")
 then
     app.finish("YUAN-TI (Volos)");
 end
@@ -616,7 +616,7 @@ end
 
 rule "ENDING - HALF-ORC"
 when
-    r : Response(response == "Nah, give me some monster blood!" || response == "Wait, what's this Intelligence penalty? I don't want to be stupid, can I backpedal a bit and be a bit more heroic?" || response == "One of my parents is from a species that is thought to be brutish and cruel")
+    r : Response(response == "Nah, give me some monster blood!" || response == "Uh, just give me a touch, just enough to make it nuanced" || response == "Wait, what's this Intelligence penalty? I don't want to be stupid, can I backpedal a bit and be a bit more heroic?" || response == "One of my parents is from a species that is thought to be brutish and cruel")
 then
     app.finish("HALF-ORC (PHB)");
 end
@@ -669,7 +669,7 @@ end
 
 rule "ENDING - GOLIATH"
 when
-    r : Response(response == "POOMP DE MOOSCLES")
+    r : Response(response == "POOMP DE MOOSCLES" || response == "Wait I don't want to be short")
 then
     app.finish("GOLIATH (Volos)");
 end
@@ -762,7 +762,7 @@ end
 
 rule "Q34 - ENDING - ORC"
 when
-    r : Response(response == "Big")
+    r : Response(response == "Big" || response == "Face them head on, I'm no coward!")
 then
     Question qx = new Question("You might want to be an ORC (Volos)", new String[]{"ORC sounds great!", "Wait, what's this Intelligence penalty? I don't want to be stupid, can I backpedal a bit and be a bit more heroic?"});
     
@@ -804,13 +804,7 @@ rule "ENDING - SEA ELF"
 when
     r : Response(response == "Wait, can I do this but more Elf-y?" || response == "When I said Elf I meant like, Mermaids")
 then
-    Question qx = new Question("You might want to be SEA ELF - Elf Subrace", new String[]{"EXIT - SEA ELF"});
-    
-    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
-    
-    Response rx = new Response(qx, responsex);
-    
-    insert(rx);
+    app.finish("SEA ELF (Elf Subrace)");
 end
 
 rule "Q36 - ENDING - AASIMAR"
@@ -914,24 +908,31 @@ then
     app.finish("MOUNTAIN DWARF (Dwarf Subrace)");
 end
 
-rule "ENDING - DEUGAR"
+rule "ENDING - DUEGAR"
 when
-    r : Response(response == "Neither, I'm angry and kind of an asshole")
+    r : Response(response == "Neither, I'm angry and kind of an asshole" || response == "I'm strong but instead of cheery dwarfness you got mean dwarfness")
 then
-    app.finish("DEUGAR (Dwarf Subrace)");
+    app.finish("DUEGAR (Dwarf Subrace)");
 end
 
 rule "Q40 - ENDING - ELF"
 when
     r : Response(response == "I feel pretty")
 then
-    Question qx = new Question("You might want to be an ELF (PHB)", new String[]{"Yay I'm done!"});
+    Question qx = new Question("You might want to be an ELF (PHB)", new String[]{"ELF sounds great!", "Yay I'm done!"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
     Response rx = new Response(qx, responsex);
     
     insert(rx);
+end
+
+rule "ENDING - ELF"
+when
+    r : Response(response == "ELF sounds great!")
+then
+    app.finish("ELF (PHB)");
 end
 
 rule "Q41"
@@ -998,13 +999,20 @@ rule "Q44 - ENDING - HALFLING"
 when
     r : Response(response == "I would like to maintain some semblance of gravitas")
 then
-    Question qx = new Question("You might want to be HALFLING - PHB", new String[]{"HALFLING - EXIT", "Cool, off-brand Hobbit"});
+    Question qx = new Question("You might want to be HALFLING - PHB", new String[]{"HALFLING sounds great!", "Cool, off-brand Hobbit"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
     Response rx = new Response(qx, responsex);
     
     insert(rx);
+end
+
+rule "ENDING - HALFLING"
+when
+    r : Response(response == "HALFLING sounds great!")
+then
+    app.finish("HALFLING (PHB)");
 end
 
 rule "Q45"
@@ -1036,15 +1044,22 @@ end
 
 rule "Q46 - ENDING - GNOME"
 when
-    r : Response(response == "I would like to maintain some semblance of gravitas")
+    r : Response(response == "EVERYTHING IS MAGIC AND GLITTER")
 then
-    Question qx = new Question("You might want to be GNOME - PHB", new String[]{"GNOME - EXIT", "...is this just a magic hobbit?"});
+    Question qx = new Question("You might want to be GNOME - PHB", new String[]{"GNOME sounds great!", "...is this just a magic hobbit?"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
     Response rx = new Response(qx, responsex);
     
     insert(rx);
+end
+
+rule "ENDING - GNOME"
+when
+    r : Response(response == "GNOME sounds great!")
+then
+    app.finish("GNOME (PHB)");
 end
 
 rule "Q47"
@@ -1069,15 +1084,22 @@ end
 
 rule "Q48 - ENDING - MOUNTAIN GNOME"
 when
-    r : Response(response == "I would like to maintain some semblance of gravitas")
+    r : Response(response == "LETS MAKE TOYS")
 then
-    Question qx = new Question("You might want to be MOUNTAIN GNOME - Gnome Subrace", new String[]{"MOUNTAIN GNOME - EXIT", "FORGET THE TOYS WE MUST GO DEEPER"});
+    Question qx = new Question("You might want to be MOUNTAIN GNOME - Gnome Subrace", new String[]{"MOUNTAIN GNOME sounds great!", "FORGET THE TOYS WE MUST GO DEEPER"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
     Response rx = new Response(qx, responsex);
     
     insert(rx);
+end
+
+rule "ENDING - MOUNTAIN GNOME"
+when
+    r : Response(response == "MOUNTAIN GNOME sounds great!")
+then
+    app.finish("MOUNTAIN GNOME (Gnome Subrace)");
 end
 
 rule "ENDING - DEEP GNOME"
@@ -1216,13 +1238,20 @@ rule "Q57 - ENDING - DROW"
 when
     r : Response(response == "I wanted to be Dark and Brooding" || response == "I'm quick and lithe, like an elf but DARK")
 then
-    Question qx = new Question("You might want to be DROW - Elf Subrace", new String[]{"DROW - EXIT", "I SAID DARK AND BROODING"});
+    Question qx = new Question("You might want to be DROW - Elf Subrace", new String[]{"DROW sounds great!", "I SAID DARK AND BROODING"});
     
     String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
     Response rx = new Response(qx, responsex);
     
     insert(rx);
+end
+
+rule "ENDING - DROW"
+when
+    r : Response(response == "DROW sounds great!")
+then
+    app.finish("DROW (Elf Subrace)");
 end
 
 rule "ENDING - SHADAR-KAI"
