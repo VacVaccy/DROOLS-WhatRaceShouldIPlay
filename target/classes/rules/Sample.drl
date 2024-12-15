@@ -16,12 +16,12 @@ end
 rule "Init"
 when
 then
-    insert(new Question("Wanna play Dungeons & Dragons", new String[]{"Yes!"}));
+    insert(new Question("", new String[]{"I wanna play Dungeons & Dragons!"}));
     app = new App();
     insert(app);
 end
 
-rule "Q1"
+rule "QInit"
 when
     q : Question()
 then
@@ -34,28 +34,1232 @@ then
     insert(r);
 end
 
+rule "Q0"
+when
+    r : Response(response == "I wanna play Dungeons & Dragons!")
+then
+    Question qx = new Question("Yay! Why do you wanna play High Adventure Pop Fantasy?", new String[]{"I wanna go on adventures!", "Can I be someone from Lord of the Rings or something?", "I want to be a special snowflake", "I don't like fantasy I just wanna do this RPG thing"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q1"
+when
+    r : Response(response == "I don't like fantasy I just wanna do this RPG thing")
+then
+    Question qx = new Question("You don't wanna play D&D, you want to play something else", new String[]{"Elves are dumb let's be vampires and shit"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "BAD ENDING - 1"
+when
+    r : Response(response == "Elves are dumb lets be vampires n shit")
+then
+    app.badFinish("And now we are playing Vampyre I hope you're happy");
+end
+
 rule "Q2"
 when
-    r : Response(response == "Yes!")
+    r : Response(response == "I want to be a special snowflake" || response == "Actually Tolkein is a hack. Gimme something DIFFERENT")
 then
-    Question q2 = new Question("Yay! Why do you wanna play High Adventure Pop Fantasy?", new String[]{"I wanna go on adventures!", "Can I be someone from Lord of the Rings or something?", "I want to be a special snowflake", "I don't like fantasy I just wanna do this RPG thing"});
+    Question qx = new Question("Ugh, FINE. What makes you so damn special then?", new String[]{"I'm DARK and MISUNDERSTOOD and there's no true RIGHT or WRONG", "I want to be a motherfucking dragon", "Uh, I dunno, just make me not an elf, dwarf, angel, devil or something done 100 times before okay?"});
     
-    String response2 = app.askQuestion(q2.getText(), q2.getResponses());
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
-    Response r2 = new Response(q2, response2);
+    Response rx = new Response(qx, responsex);
     
-    insert(r2);
+    insert(rx);
 end
 
 rule "Q3"
 when
-    r : Response(response == "I wanna go on adventures!")
+    r : Response(response == "Uh, I dunno, just make me not an elf, dwarf, angel, devil or something done 100 times before okay?")
 then
-    Question q3 = new Question("Every hero is special. What makes you special?", new String[]{"What's on the inside. And my sword. And my magic.", "Uh, I'm an elf or something?"});
+    Question qx = new Question("Wow. That's helpful. Is Animal Person weird enough for you?", new String[]{"Uh, like a furry?", "Gross no, I said SPECIAL"});
     
-    String response3 = app.askQuestion(q3.getText(), q3.getResponses());
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
     
-    Response r3 = new Response(q3, response3);
+    Response rx = new Response(qx, responsex);
     
-    insert(r3);
+    insert(rx);
 end
+
+rule "Q4"
+when
+    r : Response(response == "Uh, like a furry?" || response == "Can I be an animal person?")
+then
+    Question qx = new Question("Are you a furry?", new String[]{"Actually more of a horse thing for me", "No but birds are cool", "OwO", "Actually I'm a Scalie"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - CENTAUR"
+when
+    r : Response(response == "Actually more of a horse thing for me")
+then
+    app.finish("CENTAUR (GGtR)");
+end
+
+rule "Q5"
+when
+    r : Response(response == "OwO")
+then
+    Question qx = new Question("*sigh* WHATS YOUR FURSONA", new String[]{"Cat! Meow!", "Cow! Moo!", "Elephant... uh...", "...none of the others?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - TABAXI"
+when
+    r : Response(response == "Cat! Meow!")
+then
+    app.finish("TABAXI (Volos)");
+end
+
+rule "ENDING - MINOTAUR"
+when
+    r : Response(response == "Cow! Moo!")
+then
+    app.finish("MINOTAUR (GGtR)");
+end
+
+rule "ENDING - LOXADON"
+when
+    r : Response(response == "Elephant... uh...")
+then
+    app.finish("LOXADON (GGtR)");
+end
+
+rule "ENDING - SHIFTER"
+when
+    r : Response(response == "...none of the others?")
+then
+    app.finish("SHIFTER (Eberron)");
+end
+
+rule "Q6"
+when
+    r : Response(response == "No but birds are cool")
+then
+    Question qx = new Question("Majestic Eagle or Obnoxious Corvid?", new String[]{"I just wanna soar in the air majestic and free", "CAW CAW MOTHERFUCKER"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - AARAKOCRA"
+when
+    r : Response(response == "I just wanna soar in the air majestic and free")
+then
+    app.finish("AARAKOCRA (Elemental Evil)");
+end
+
+rule "ENDING - KENKU"
+when
+    r : Response(response == "CAW CAW MOTHERFUCKER")
+then
+    app.finish("KENKU (Volos)");
+end
+
+rule "Q7"
+when
+    r : Response(response == "Gross no, I said SPECIAL")
+then
+    Question qx = new Question("Are you just looking for weird for weird's sake at this point?", new String[]{"Yeah. Fuck you", "...you're right. Let's stick to something at least a bit familiar"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q8"
+when
+    r : Response(response == "Yeah. Fuck you")
+then
+    Question qx = new Question("Ugh fine. One of your parents is a genie", new String[]{"Yeah that works", "Genies? Get that Will Smith shit out of my face"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q9 - ENDING - GENASI"
+when
+    r : Response(response == "Yeah that works")
+then
+    Question qx = new Question("You might want to be GENASI (Elemental Evil)", new String[]{"GENASI sounds great!", "Let's Captain Planet this shit"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - GENASI"
+when
+    r : Response(response == "GENASI sounds great!")
+then
+    app.finish("GENASI (Elemental Evil)");
+end
+
+rule "Q10"
+when
+    r : Response(response == "Let's Captain Planet this shit")
+then
+    Question qx = new Question("Genies are elemental, so pick an element", new String[]{"Well, there's only one REAL choice...", "Rock Hard baby", "We all float down here", "Actually I wanted to be Aquaman"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - FIRE GENASI"
+when
+    r : Response(response == "Well, there's only one REAL choice...")
+then
+    app.finish("FIRE GENASI (Genasi Subrace)");
+end
+
+rule "ENDING - EARTH GENASI"
+when
+    r : Response(response == "Rock Hard baby")
+then
+    app.finish("EARTH GENASI (Genasi Subrace)");
+end
+
+rule "ENDING - AIR GENASI"
+when
+    r : Response(response == "We all float down here")
+then
+    app.finish("AIR GENASI (Genasi Subrace)");
+end
+
+rule "ENDING - WATER GENASI"
+when
+    r : Response(response == "Actually I wanted to be Aquaman")
+then
+    app.finish("WATER GENASI (Genasi Subrace)");
+end
+
+rule "Q11"
+when
+    r : Response(response == "Genies? Get that Will Smith shit out of my face")
+then
+    Question qx = new Question("Seriously? How about multiverse dwelling psionic plane hoppers?", new String[]{"Okay, that's pretty fucking out there", "That's just ugly elves with mind powers"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q12 - ENDING - GITH"
+when
+    r : Response(response == "Okay, that's pretty fucking out there")
+then
+    Question qx = new Question("You might want to be a GITH (MtoF)", new String[]{"GITH sounds great!", "Alright so I can explode heads with my mind right?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - GITH"
+when
+    r : Response(response == "GITH sounds great!")
+then
+    app.finish("GITH (MtoF)");
+end
+
+rule "Q13"
+when
+    r : Response(response == "Alright so I can explode heads with my mind right?")
+then
+    Question qx = new Question("Not quite. Anyways Gith comes in two flavors", new String[]{"WE ARE IMMORTAL WE ARE CONQUERERS WE ARE GITH", "Zen as fuck KungFu as Fuck Forge Chaos into Reality"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - GITHYANKI"
+when
+    r : Response(response == "WE ARE IMMORTAL WE ARE CONQUERERS WE ARE GITH")
+then
+    app.finish("GITHYANKI (Gith Subrace)");
+end
+
+rule "ENDING - GITHZERAI"
+when
+    r : Response(response == "Zen as fuck KungFu as Fuck Forge Chaos into Reality")
+then
+    app.finish("GITHZERAI (Gith Subrace)");
+end
+
+rule "Q14"
+when
+    r : Response(response == "That's just ugly elves with mind powers")
+then
+    Question qx = new Question("Blue hairless vulcan perfectionists? Like this isn't even DnD anymore", new String[]{"Fine you got me", "Vulcans are just space elves These fuckers are just milktoast af"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - VEDALKEN"
+when
+    r : Response(response == "Zen as fuck KungFu as Fuck Forge Chaos into Reality")
+then
+    app.finish("VEDALKEN (GGtR)");
+end
+
+rule "Q15"
+when
+    r : Response(response == "Vulcans are just space elves These fuckers are just milktoast af")
+then
+    Question qx = new Question("OKAY YOU HAVE TENTACLES AND MUTATIONS AND YOU'RE LITERALLY A MAD SCIENCE EXPERIMENT", new String[]{"That is the shit I'm talking about", "No I want to be mysterious"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - SIMIC HYBRID"
+when
+    r : Response(response == "Zen as fuck KungFu as Fuck Forge Chaos into Reality")
+then
+    app.finish("SIMIC HYBRID (GGtR)");
+end
+
+rule "Q16 - ENDING - KALASHTAR"
+when
+    r : Response(response == "No I want to be mysterious")
+then
+    Question qx = new Question("You might want to be KALASHTAR - Eberron", new String[]{"KALASHTAR sounds great!", "...I don't know what this is"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - KALASHTAR"
+when
+    r : Response(response == "KALASHTAR sounds great!")
+then
+    app.finish("KALASHTAR (Eberron)");
+end
+
+rule "BAD ENDING - 2"
+when
+    r : Response(response == "...I don't know what this is")
+then
+	app.badFinish("Neither do I. Also I'm banning you from my game.");
+end
+
+rule "Q17"
+when
+    r : Response(response == "Actually I'm a Scalie" || response == "I am actually an emotionless lizard person")
+then
+    Question qx = new Question("Like Ted Cruz. Neat. So what kind of scales we talking?", new String[]{"A MOTHERFUCKING DRAGON", "Snek", "I dunno just general reptiles I guess"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - LIZARDFOLK"
+when
+    r : Response(response == "I dunno just general reptiles I guess")
+then
+    app.finish("LIZARDFOLK (Volos)");
+end
+
+rule "ENDING - YUAN-TI"
+when
+    r : Response(response == "Snek")
+then
+    app.finish("YUAN-TI (Volos)");
+end
+
+rule "Q18 - ENDING - DRAGONBORN"
+when
+    r : Response(response == "A MOTHERFUCKING DRAGON" || response == "YAY" || response == "Okay Fine")
+then
+    Question qx = new Question("You might want to be a DRAGONBORN (PHB)", new String[]{"DRAGONBORN sounds great!", "Wait does this come kid-sized?", "This isn't a dragon"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - DRAGONBORN"
+when
+    r : Response(response == "DRAGONBORN sounds great!")
+then
+    app.finish("DRAGONBORN (PHB)");
+end
+
+rule "ENDING - KOBOLD"
+when
+    r : Response(response == "Wait does this come kid-sized?" || response == "Yea")
+then
+    app.finish("KOBOLD (Volos)");
+end
+
+rule "Q19"
+when
+    r : Response(response == "This isn't a dragon")
+then
+    Question qx = new Question("Close enough", new String[]{"Okay Fine", "Noooooooooo lemme be a Dragon!"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "BAD ENDING - 3"
+when
+    r : Response(response == "Noooooooooo lemme be a Dragon!")
+then
+    app.badFinish("Ugh, just get out");
+end
+
+rule "Q20-1"
+when
+    r : Response(response == "I want to be a motherfucking dragon")
+then
+    Question qx = new Question("You can't be a dragon", new String[]{"UGH", "It's called Dungeons & Dragons you wangrod"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q20-2"
+when
+    r : Response(response == "UGH")
+then
+    Question qx = new Question("You can't be a dragon", new String[]{"FIINE"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q20-3"
+when
+    r : Response(response == "FIINE")
+then
+    Question qx = new Question("You can't be a dragon", new String[]{"YOU SUCK"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q20-4"
+when
+    r : Response(response == "YOU SUCK")
+then
+    Question qx = new Question("You can't be a dragon", new String[]{"FUN POLICE"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q20-5"
+when
+    r : Response(response == "FUN POLICE")
+then
+    Question qx = new Question("You can't be a dragon", new String[]{"SRYSLY"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q21"
+when
+    r : Response(response == "It's called Dungeons & Dragons you wangrod")
+then
+    Question qx = new Question("FINE PICK YOUR FAVORITE COLOR", new String[]{"YAY"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+
+rule "Q22"
+when
+    r : Response(response == "I wanna go on adventures!" || response == "SRYSLY")
+then
+    Question qx = new Question("Every hero is special. What makes you special?", new String[]{"What's on the inside. And my sword. And my magic.", "Uh, I'm an elf or something?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q23 - ENDING - HUMAN"
+when
+    r : Response(response == "What's on the inside. And my sword. And my magic.")
+then
+    Question qx = new Question("You might want to be a HUMAN (PHB)", new String[]{"HUMAN sounds great!", "WAAAAIIIIIIIIT"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - HUMAN"
+when
+    r : Response(response == "HUMAN sounds great!")
+then
+    app.finish("HUMAN (PHB)");
+end
+
+rule "Q24"
+when
+    r : Response(response == "WAAAAIIIIIIIIT")
+then
+    Question qx = new Question("Ugh what is it", new String[]{"100% human is lame. Can I be part fantasy?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q25"
+when
+    r : Response(response == "100% human is lame. Can I be part fantasy?")
+then
+    Question qx = new Question("Alright. Are you half monstrous or half magical and pretty?", new String[]{"Yeah I still wanna be magical and pretty", "Nah, give me some monster blood!"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - HALF-ELF"
+when
+    r : Response(response == "Yeah I still wanna be magical and pretty" || response == "Can I be only KIND OF Elf-y?")
+then
+ 	app.finish("HALF-ELF (PHB)");
+end
+
+rule "ENDING - HALF-ORC"
+when
+    r : Response(response == "Nah, give me some monster blood!" || response == "Wait, what's this Intelligence penalty? I don't want to be stupid, can I backpedal a bit and be a bit more heroic?" || response == "One of my parents is from a species that is thought to be brutish and cruel")
+then
+    app.finish("HALF-ORC (PHB)");
+end
+
+rule "Q26"
+when
+    r : Response(response == "Uh, I'm an elf or something?" || response == "Can I be someone from Lord of the Rings or something")
+then
+    Question qx = new Question("Sure, I like the classic fantasy races anyways", new String[]{"Me too!", "Actually Tolkein is a hack. Gimme something DIFFERENT"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q27"
+when
+    r : Response(response == "Me too!")
+then
+    Question qx = new Question("Nice! Wanna be human sized or tiny?", new String[]{"Kid-sized please!", "I ain't no pedo", "...is there a Big Size?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q28"
+when
+    r : Response(response == "...is there a Big Size?" || response == "Can I be a Giant?")
+then
+    Question qx = new Question("...Sure. More of the Gentle Nature Giant or STRONK MEN", new String[]{"Pls be gentl", "POOMP DE MOOSCLES"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - FIRBOLG"
+when
+    r : Response(response == "Pls be gentl")
+then
+    app.finish("FIREBOLG (Volos)");
+end
+
+rule "ENDING - GOLIATH"
+when
+    r : Response(response == "POOMP DE MOOSCLES")
+then
+    app.finish("GOLIATH (Volos)");
+end
+
+rule "Q29"
+when
+    r : Response(response == "I ain't no pedo")
+then
+    Question qx = new Question("Lithe 'n' Pretty, or Short 'n' Swole?", new String[]{"I feel pretty", "Do u even lift bro?", "Uh, I don't like these options"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q30"
+when
+    r : Response(response == "Uh, I don't like these options")
+then
+    Question qx = new Question("Sure, but we're getting less classic now.", new String[]{"Can I be a Giant?", "No problem, lets move over here"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q31"
+when
+    r : Response(response == "No problem, lets move over here")
+then
+    Question qx = new Question("Uncommon Races! What sounds appealing to you?", new String[]{"We're on a mission from God", "Basically Aquaman is the best DC superhero", "Beep Boop Bop I am Robot", "...can I be a doppelganger?", "Can I be an animal person", "Can I be a classic Monster?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - WARFORGED"
+when
+    r : Response(response == "Beep Boop Bop I am Robot")
+then
+	app.finish("WARFORGED (Eberron)");
+end
+
+rule "ENDING - CHANGELINGS"
+when
+    r : Response(response == "...can I be a doppelganger?")
+then
+    app.finish("CHANGELINGS (Eberron)");
+end
+
+rule "Q32"
+when
+    r : Response(response == "Can I be a classic Monster?")
+then
+    Question qx = new Question("Yup! Do you want to go part of the way, or all the way", new String[]{"Uh, just give me a touch, just enough to make it nuanced", "Oh, lets go 100% monster"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q33"
+when
+    r : Response(response == "Oh, lets go 100% monster")
+then
+    Question qx = new Question("Big version or Small Version", new String[]{"Big", "Small"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - GOBLIN"
+when
+    r : Response(response == "Small" || response == "Nay")
+then
+    app.finish("GOBLIN (Volos)");
+end
+
+rule "Q34 - ENDING - ORC"
+when
+    r : Response(response == "Big")
+then
+    Question qx = new Question("You might want to be an ORC (Volos)", new String[]{"ORC sounds great!", "Wait, what's this Intelligence penalty? I don't want to be stupid, can I backpedal a bit and be a bit more heroic?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - ORC"
+when
+    r : Response(response == "ORC sounds great!")
+then
+    app.finish("ORC (Volos)");
+end
+
+rule "Q35 - ENDING - TRITON"
+when
+    r : Response(response == "Basically Aquaman is the best DC superhero")
+then
+    Question qx = new Question("You might want to be a TRITON (Volos)", new String[]{"TRITON sounds great!", "Wait, can I do this but more Elf-y?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - TRITON"
+when
+    r : Response(response == "TRITON sounds great!")
+then
+    app.finish("TRITON (Volos)");
+end
+
+rule "ENDING - SEA ELF"
+when
+    r : Response(response == "Wait, can I do this but more Elf-y?" || response == "When I said Elf I meant like, Mermaids")
+then
+    Question qx = new Question("You might want to be SEA ELF - Elf Subrace", new String[]{"EXIT - SEA ELF"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q36 - ENDING - AASIMAR"
+when
+    r : Response(response == "We're on a mission from God")
+then
+    Question qx = new Question("You might want to be an AASIMAR (Volos)", new String[]{"ASSIMAR sounds great!", "Fuck off Tieflings!"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - AASIMAR"
+when
+    r : Response(response == "AASIMAR sounds great!")
+then
+    app.finish("AASIMAR (Volos)");
+end
+
+rule "Q37"
+when
+    r : Response(response == "Fuck off Tieflings!")
+then
+    Question qx = new Question("More choices! What kind of angel?", new String[]{"You know, light, goodness, yadda yadda", "And you will know My name is the Lord when I lay My vengeance upon thee", "Oh I wanna be an angel but not like goody two shoes A BAD ANGEL"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - PROTECTOR"
+when
+    r : Response(response == "You know, light, goodness, yadda yadda")
+then
+    app.finish("PROTECTOR (Aasimar Subrace)");
+end
+
+rule "ENDING - SCOURGE"
+when
+    r : Response(response == "And you will know My name is the Lord when I lay My vengeance upon thee")
+then
+    app.finish("SCOURGE (Aasimar Subrace)");
+end
+
+rule "ENDING - FALLEN"
+when
+    r : Response(response == "Oh I wanna be an angel but not like goody two shoes A BAD ANGEL" || response == "I was once holy but now I've FALLEN FROM GRACE")
+then
+    app.finish("FALLEN (Aasimar Subrace)");
+end
+
+rule "Q38 - ENDING - DWARF"
+when
+    r : Response(response == "Do u even lift bro?")
+then
+    Question qx = new Question("You might want to be DWARF (PHB)", new String[]{"DWARF sounds great!", "Wait I don't want to be short", "By Thorin's beard, time to drink ale and axe things!"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - DWARF"
+when
+    r : Response(response == "DWARF sounds great!")
+then
+    app.finish("DWARF (PHB)");
+end
+
+rule "Q39"
+when
+    r : Response(response == "By Thorin's beard, time to drink ale and axe things!")
+then
+    Question qx = new Question("So, are you hardier like the hills, or stronger like stone?", new String[]{"Hardy n Hilly!", "Stone is Strength!", "Neither, I'm angry and kind of an asshole"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - HILL DWARF"
+when
+    r : Response(response == "Hardy n Hilly!")
+then
+    app.finish("HILL DWARF (Dwarf Subrace)");
+end
+
+rule "ENDING - MOUNTAIN DWARF"
+when
+    r : Response(response == "Stone is Strength!")
+then
+    app.finish("MOUNTAIN DWARF (Dwarf Subrace)");
+end
+
+rule "ENDING - DEUGAR"
+when
+    r : Response(response == "Neither, I'm angry and kind of an asshole")
+then
+    app.finish("DEUGAR (Dwarf Subrace)");
+end
+
+rule "Q40 - ENDING - ELF"
+when
+    r : Response(response == "I feel pretty")
+then
+    Question qx = new Question("You might want to be an ELF (PHB)", new String[]{"Yay I'm done!"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q41"
+when
+    r : Response(response == "Yay I'm done!")
+then
+    Question qx = new Question("Wait, now it gets complicated. Is magic or nature more important to you?", new String[]{"Motherfucker I'm MADE of Magic", "Elves are and always will be badass treehuggers", "Wait, none of this is right"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - HIGH ELF"
+when
+    r : Response(response == "Motherfucker I'm MADE of Magic")
+then
+    app.finish("HIGH ELF (Elf Subrace)");
+end
+
+rule "ENDING - WOOD ELF"
+when
+    r : Response(response == "Elves are and always will be badass treehuggers")
+then
+    app.finish("WOOD ELF (Elf Subrace)");
+end
+
+rule "Q42"
+when
+    r : Response(response == "Wait, none of this is right")
+then
+    Question qx = new Question("What? Fine. What's the problem?", new String[]{"Aren't Elves Faeries? Make me goddamn weird and Fey", "When I said Elf I meant like, Mermaids", "Can I be only KIND OF Elf-y?", "I wanted to be Dark and Brooding"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - ELADRIN"
+when
+    r : Response(response == "Aren't Elves Faeries? Make me goddamn weird and Fey")
+then
+    app.finish("ELADRIN (Elf Subrace)");
+end
+
+rule "Q43"
+when
+    r : Response(response == "Kid-sized please!")
+then
+    Question qx = new Question("Alright, are you only a bit silly or extremely silly?", new String[]{"I would like to maintain some semblance of gravitas", "EVERYTHING IS MAGIC AND GLITTER", "Can I have a bit of dark humor?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q44 - ENDING - HALFLING"
+when
+    r : Response(response == "I would like to maintain some semblance of gravitas")
+then
+    Question qx = new Question("You might want to be HALFLING - PHB", new String[]{"HALFLING - EXIT", "Cool, off-brand Hobbit"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q45"
+when
+    r : Response(response == "Cool, off-brand Hobbit")
+then
+    Question qx = new Question("Not done yet. Want to be slightly dwarfy, or nimble?", new String[]{"Make me hardy", "Make me nimble"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - STOUT"
+when
+    r : Response(response == "Make me hardy")
+then
+    app.finish("STOUT (Halfling Subrace)");
+end
+
+rule "ENDING - LIGHTFOOT"
+when
+    r : Response(response == "Make me nimble")
+then
+    app.finish("LIGHTFOOT (Halfling Subrace)");
+end
+
+rule "Q46 - ENDING - GNOME"
+when
+    r : Response(response == "I would like to maintain some semblance of gravitas")
+then
+    Question qx = new Question("You might want to be GNOME - PHB", new String[]{"GNOME - EXIT", "...is this just a magic hobbit?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q47"
+when
+    r : Response(response == "...is this just a magic hobbit?")
+then
+    Question qx = new Question("You can be a woodsy trickster or steampunk tinkerer", new String[]{"I AM A MAGIC MUSHROOM", "LETS MAKE TOYS"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - FOREST GNOME"
+when
+    r : Response(response == "I AM A MAGIC MUSHROOM")
+then
+    app.finish("FOREST GNOME (Gnome Subrace)");
+end
+
+rule "Q48 - ENDING - MOUNTAIN GNOME"
+when
+    r : Response(response == "I would like to maintain some semblance of gravitas")
+then
+    Question qx = new Question("You might want to be MOUNTAIN GNOME - Gnome Subrace", new String[]{"MOUNTAIN GNOME - EXIT", "FORGET THE TOYS WE MUST GO DEEPER"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - DEEP GNOME"
+when
+    r : Response(response == "FORGET THE TOYS WE MUST GO DEEPER")
+then
+    app.finish("DEEP GNOME (Gnome Subrace)");
+end
+
+rule "Q49"
+when
+    r : Response(response == "I'm DARK and MISUNDERSTOOD and there's no true RIGHT or WRONG")
+then
+    Question qx = new Question("Seriously, you could just like, be a dark and brooding white dude", new String[]{"Yeah, I guess you're right", "No, I wear the darkness on my sleeve for all the world to see"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q50"
+when
+    r : Response(response == "No, I wear the darkness on my sleeve for all the world to see")
+then
+    Question qx = new Question("Okay, well we got options. First off, are you actually kind of monstrous or just misunderstood", new String[]{"No one gets me, especially my Mom", "You know what, I was the monster all along"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q51"
+when
+    r : Response(response == "You know what, I was the monster all along")
+then
+    Question qx = new Question("Great! First off, how do you feel about comic relief?", new String[]{"Can't spell Slaughter without Laughter", "Do you think this is funny?"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q52"
+when
+    r : Response(response == "Do you think this is funny?")
+then
+    Question qx = new Question("Right. Sorry. What is power to you?", new String[]{"Strength", "Intellect"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q53"
+when
+    r : Response(response == "Intellect")
+then
+    Question qx = new Question("But a bit of strength is needed to right? To conquer?", new String[]{"Deception is the ultimate weapon", "Tactical prowess marks a keen mind"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - HOBGOBLIN"
+when
+    r : Response(response == "Tactical prowess marks a keen mind")
+then
+    app.finish("HOBGOBLIN (Volos)");
+end
+
+rule "Q54"
+when
+    r : Response(response == "Strength")
+then
+    Question qx = new Question("Surprise attacks, or face the enemy head on because you're not a coward", new String[]{"Face them head on, I'm no coward!", "Ambushes aren't cowardly, I'm just lazy"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - BUGBEAR"
+when
+    r : Response(response == "Ambushes aren't cowardly, I'm just lazy")
+then
+    app.finish("BUGBEAR (Volos)");
+end
+
+rule "Q55"
+when
+    r : Response(response == "No one gets me, especially my Mom")
+then
+    Question qx = new Question("Alright, why do people misunderstand you", new String[]{"I'm the DARK AND BADASS version of some poncy elf, dwarf, or other wussy fantasy goody two shoes", "One of my parents is from a species that is thought to be brutish and cruel", "I've got sinister horns and look like the devil", "I am actually an emotionless lizard person"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - TIEFLING"
+when
+    r : Response(response == "I've got sinister horns and look like the devil")
+then
+    app.finish("TIEFLING (PHB)");
+end
+
+rule "Q56"
+when
+    r : Response(response == "I'm the DARK AND BADASS version of some poncy elf, dwarf, or other wussy fantasy goody two shoes")
+then
+    Question qx = new Question("Cool, we actually have those if you picked that path earlier you edgelord", new String[]{"I'm strong but instead of cheery dwarfness you got mean dwarfness", "I'm quick and lithe, like an elf but DARK", "I was once holy but now I've FALLEN FROM GRACE"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "Q57 - ENDING - DROW"
+when
+    r : Response(response == "I wanted to be Dark and Brooding" || response == "I'm quick and lithe, like an elf but DARK")
+then
+    Question qx = new Question("You might want to be DROW - Elf Subrace", new String[]{"DROW - EXIT", "I SAID DARK AND BROODING"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+rule "ENDING - SHADAR-KAI"
+when
+    r : Response(response == "I SAID DARK AND BROODING")
+then
+    app.finish("SHADAR-KAI (Elf Subrace)");
+end
+
+rule "Q58"
+when
+    r : Response(response == "Can't spell Slaughter without Laughter" || response == "Can I have a bit of dark humor?")
+then
+    Question qx = new Question("Fun-sized evil it is. How do you feel about Scales?", new String[]{"Yea", "Nay"});
+    
+    String responsex = app.askQuestion(qx.getText(), qx.getResponses());
+    
+    Response rx = new Response(qx, responsex);
+    
+    insert(rx);
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
