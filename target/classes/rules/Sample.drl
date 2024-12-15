@@ -623,7 +623,7 @@ end
 
 rule "Q26"
 when
-    r : Response(response == "Uh, I'm an elf or something?" || response == "Can I be someone from Lord of the Rings or something")
+    r : Response(response == "Uh, I'm an elf or something?" || response == "Can I be someone from Lord of the Rings or something?")
 then
     Question qx = new Question("Sure, I like the classic fantasy races anyways", new String[]{"Me too!", "Actually Tolkein is a hack. Gimme something DIFFERENT"});
     
