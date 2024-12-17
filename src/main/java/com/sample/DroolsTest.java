@@ -7,6 +7,7 @@ import org.kie.api.runtime.KieSession;
 /**
  * This is a sample class to launch a rule.
  */
+
 public class DroolsTest {
 
     public static final void main(String[] args) {
