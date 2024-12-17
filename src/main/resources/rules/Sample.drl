@@ -16,9 +16,8 @@ end
 rule "Init"
 when
 then
-    insert(new Question("What Race Should I Play - D&D Race Selector", new String[]{"I wanna play Dungeons & Dragons!"}));
+    insert(new Question("What Race Should I Play - D&D Race Picker", new String[]{"I wanna play Dungeons & Dragons!"}));
     app = new App();
-    //insert(app);
 end
 
 rule "QInit"

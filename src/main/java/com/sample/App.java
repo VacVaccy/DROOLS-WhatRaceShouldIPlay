@@ -134,7 +134,7 @@ public class App {
         resultDialog.setContentPane(backgroundPanel); // panel + tło
         resultDialog.setLayout(new BorderLayout());
         resultDialog.add(resultLabel, BorderLayout.CENTER);
-        resultDialog.setSize(800, 500);
+        resultDialog.setSize(800, 500); 
         resultDialog.setLocationRelativeTo(null);
         resultDialog.setVisible(true);
     }
